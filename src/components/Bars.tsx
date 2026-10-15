@@ -16,8 +16,8 @@ export function HBars({ buckets, limit = 8 }: { buckets: Bucket[]; limit?: numbe
       {rows.map((b) => {
         const w = (Math.abs(b.net) / max) * 50;
         return (
-          <div key={b.label} className="grid grid-cols-[minmax(64px,max-content)_1fr_72px] items-center gap-2 text-sm group" title={`${b.trades} trades · win rate ${pct(winRate(b))}`}>
-            <span className="truncate text-ink-2 max-w-[120px]" title={b.label}>{b.label}</span>
+          <div key={b.label} className="grid grid-cols-[96px_1fr_72px] items-center gap-2 text-sm group" title={`${b.trades} trades · win rate ${pct(winRate(b))}`}>
+            <span className="truncate text-ink-2" title={b.label}>{b.label}</span>
             <div className="relative h-5">
               <div className="absolute inset-y-0 left-1/2 w-px bg-[var(--axis)]" />
               <div
