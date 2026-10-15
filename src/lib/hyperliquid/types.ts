@@ -1,0 +1,75 @@
+// Shapes returned by Hyperliquid's public info endpoint (https://api.hyperliquid.xyz/info).
+// Numbers arrive as strings; we parse them at the edge.
+
+export type HlFill = {
+  coin: string;
+  px: string;
+  sz: string;
+  side: "B" | "A"; // B = bid (buy), A = ask (sell)
+  time: number;
+  startPosition: string; // signed position size before this fill
+  dir: string; // "Open Long", "Close Short", "Long > Short", "Buy" (spot) ...
+  closedPnl: string;
+  hash: string;
+  oid: number;
+  crossed: boolean;
+  fee: string;
+  tid: number;
+  feeToken?: string;
+};
+
+export type HlFunding = {
+  time: number;
+  hash: string;
+  delta: {
+    type: "funding";
+    coin: string;
+    usdc: string; // negative = paid, positive = received
+    szi: string;
+    fundingRate: string;
+  };
+};
+
+export type HlPosition = {
+  coin: string;
+  szi: string;
+  entryPx: string | null;
+  positionValue: string;
+  unrealizedPnl: string;
+  liquidationPx: string | null;
+  leverage?: { type: string; value: number };
+};
+
+export type HlClearinghouseState = {
+  marginSummary: { accountValue: string };
+  assetPositions: { position: HlPosition }[];
+};
+
+/** Normalised fill used by the engine. */
+export type Fill = {
+  id: string;
+  coin: string;
+  px: number;
+  sz: number;
+  side: "buy" | "sell";
+  time: number;
+  startPosition: number;
+  closedPnl: number;
+  fee: number;
+};
+
+export type FundingEvent = {
+  id: string;
+  coin: string;
+  usdc: number;
+  time: number;
+};
+
+export type OpenPosition = {
+  coin: string;
+  size: number; // signed
+  entryPx: number | null;
+  unrealizedPnl: number;
+  liquidationPx: number | null;
+  leverage: number | null;
+};
